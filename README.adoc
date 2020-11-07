@@ -1,0 +1,33 @@
+:ext-relative:
+
+# OP_RETURN Buffer API
+
+This is a simple API for sending _OP_RETURN_ messages.
+And retry them using a _cron job_ until they are notarized.
+
+## Installation
+
+`make install` or `make install-pip`
+
+## Config
+
+Configure the `.env` file
+
+```sh
+INPUT_PRIVKEY="" # Private key to sign the tx
+INPUT_PUBKEY="" # Public key to get the amount
+INPUT_SENDKEY="" # Public key to send the tx to
+```
+
+## Run
+
+`make api` or `make nohup`
+
+You can also check the link:Makefile{ext-relative}[Makefile] for additional commands.
+
+## Endpoints
+
+- `/?message=""`: Store the message in the _queue_.
+- `/cron`: Execute OP_RETURN using the latest item inside _queue_. Setup a _cronjob_ to call this endpoint at least every 2 minutes.
+- `/notary`: Show all the notarizations.
+- `/history`: Show all the message stored (including non notarized ones).
