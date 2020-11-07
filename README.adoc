@@ -1,9 +1,15 @@
 :ext-relative:
 
-# OP_RETURN Buffer API
+# OP_RETURN Buffer API for Notarization
 
 This is a simple API for sending _OP_RETURN_ messages.
 And retry them using a _cron job_ until they are notarized.
+
+This is a handy script because you could not send transactions
+when you have no confirmations in the previous transaction.
+
+With this buffer you can send any number of messages and they will
+get to the _Chaucha_ blockchain eventually.
 
 ## Installation
 
@@ -28,6 +34,25 @@ You can also check the link:Makefile{ext-relative}[Makefile] for additional comm
 ## Endpoints
 
 - `/?message=""`: Store the message in the _queue_.
+
+Example:
+
+`curl -i -X GET 'http:/0.0.0.0:8000/?message=holamundo'`
+
 - `/cron`: Execute OP_RETURN using the latest item inside _queue_. Setup a _cronjob_ to call this endpoint at least every 2 minutes.
+
+Example:
+
+`curl -i -X GET 'http:/0.0.0.0:8000/cron'`
+
 - `/notary`: Show all the notarizations.
+
+Example:
+
+`curl -i -X GET 'http:/0.0.0.0:8000/notary'`
+
 - `/history`: Show all the message stored (including non notarized ones).
+
+Example:
+
+`curl -i -X GET 'http:/0.0.0.0:8000/history'`
